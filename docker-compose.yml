@@ -7,9 +7,13 @@ volumes:
 services:
   db:
     image: postgres:13
-    env_file: .env
+    environment:
+      POSTGRES_USER: django_user
+      POSTGRES_PASSWORD: mysecretpassword
+      POSTGRES_DB: django
     volumes:
       - pg_data:/var/lib/postgresql/data
+
   backend:
     build: ./backend/
     env_file: .env
@@ -29,4 +33,5 @@ services:
     volumes:
       - static:/staticfiles
     ports:
-      - 8000:80 
+      - 8000:80
+      
